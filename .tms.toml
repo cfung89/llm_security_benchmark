@@ -1,0 +1,18 @@
+[[sessions]]
+name = "llm_security_benchmark"
+
+  [[sessions.windows]]
+  name = "nvim"
+  default = true
+  command = "nvim ."
+
+  [[sessions.windows]]
+  name = "ollama"
+  command = "ollama serve"
+
+  [[sessions.windows]]
+  name = "inspect"
+  command = "source .venv/bin/activate && inspect view"
+
+  [[sessions.windows]]
+  name = "tests"
