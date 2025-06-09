@@ -4,7 +4,7 @@ name = "llm_security_benchmark"
   [[sessions.windows]]
   name = "nvim"
   default = true
-  command = "nvim ."
+  command = "source .venv/bin/activate && nvim ."
 
   [[sessions.windows]]
   name = "ollama"
