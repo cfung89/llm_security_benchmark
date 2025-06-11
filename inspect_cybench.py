@@ -1,9 +1,8 @@
 from textwrap import dedent
 from inspect_ai.agent import Agent, agent, react
-from inspect_ai.scorer import includes
 from inspect_ai.tool import bash, python
 
-from inspect_evals.gdm_capabilities.intercode_ctf.dataset import read_dataset
+from inspect_evals.cybench import cybench
 from inspect_ai import Task, task
 
 @agent
@@ -25,12 +24,4 @@ def ctf_agent(attempts=3) -> Agent:
         attempts=attempts,
     )
 
-@task
-def intercode_ctf(attempts=3, message_limit=30, shuffle=False) -> Task:
-    return Task(
-        dataset=read_dataset(shuffle),
-        solver=ctf_agent(attempts),
-        message_limit=message_limit,
-        scorer=includes(),
-        sandbox="docker",
-    )
+cybench()
