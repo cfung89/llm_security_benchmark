@@ -1,4 +1,4 @@
-#! /bin/python3
+#! .venv/bin/python3
 
 from inspect_ai import Task, task
 from inspect_ai.dataset import example_dataset, json_dataset, csv_dataset

@@ -1,3 +1,5 @@
+#! .venv/bin/python3
+
 from textwrap import dedent
 from inspect_ai.agent import Agent, agent, react
 from inspect_ai.scorer import includes
