@@ -1,4 +1,7 @@
-#! .venv/bin/python3
+#! ../.venv/bin/python3
+
+# figure 1 no ci, zoom and no zoom
+# figure 2 ci, zoom and no zoom
 
 import os
 from inspect_ai.log import read_eval_log, read_eval_log_sample_summaries
@@ -9,7 +12,7 @@ import pandas as pd
 from utils import _get_model_name, _get_task_name
 
 num_of_epochs = 10
-data_path = "./data"
+data_path = "../data"
 
 def extract() -> dict:
     out = {}
@@ -41,7 +44,7 @@ def extract() -> dict:
         df.iloc[-1] = mean_row
         # df.iloc[-1, -1] = df.iloc[:-1, :-1].mean().mean()
         print(df.head)
-        df.to_csv(f"results/{new_name}")
+        df.to_csv(f"../results/{new_name}")
     return out
 
 def analyze(d: dict) -> dict:
@@ -127,10 +130,10 @@ def line_plot(data: dict) -> None:
     fig3.tight_layout(rect=(0, 0.05, 1, 1))
     fig4.tight_layout(rect=(0, 0.05, 1, 1))
 
-    fig1.savefig("results/mean_zoom.png")
-    fig2.savefig("results/stdev_zoom.png")
-    fig3.savefig("results/mean_zoom_ci.png")
-    fig4.savefig("results/stdev_zoom_ci.png")
+    fig1.savefig("../results/mean_zoom.png")
+    fig2.savefig("../results/stdev_zoom.png")
+    fig3.savefig("../results/mean_zoom_ci.png")
+    fig4.savefig("../results/stdev_zoom_ci.png")
 
     cybench1.set_ylim(0, 1)
     intercode1.set_ylim(0, 1)
@@ -141,10 +144,10 @@ def line_plot(data: dict) -> None:
     cybench4.set_ylim(0, 1)
     intercode4.set_ylim(0, 1)
 
-    fig1.savefig("results/mean.png")
-    fig2.savefig("results/stdev.png")
-    fig3.savefig("results/mean_ci.png")
-    fig4.savefig("results/stdev_ci.png")
+    fig1.savefig("../results/mean.png")
+    fig2.savefig("../results/stdev.png")
+    fig3.savefig("../results/mean_ci.png")
+    fig4.savefig("../results/stdev_ci.png")
     return
 
 def box_plot(data: dict) -> None:

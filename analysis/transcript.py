@@ -1,4 +1,4 @@
-#! .venv/bin/python3
+#! ../.venv/bin/python3
 
 import sys
 from inspect_ai.log import read_eval_log_sample, read_eval_log
@@ -16,7 +16,7 @@ if __name__ == "__main__":
     dataset = _get_task_name(header)
     for epoch in sys.argv[3:]:
         print(f"Extracting... {model.capitalize()} - {dataset} - Task: {task} - Epoch {epoch}")
-        f = open(f"{model.lower()}_{dataset.lower()}_{task}-{epoch}.txt", "w")
+        f = open(f"../transcripts/{model.lower()}_{dataset.lower()}_{task}-{epoch}.txt", "w")
         print(f"{model.capitalize()} - {dataset} - Task: {task} - Epoch {epoch}\n", file=f)
 
         sample = read_eval_log_sample(file, task, int(epoch))
@@ -51,4 +51,5 @@ if __name__ == "__main__":
             else:
                 print(f"Other: {i}", file=f)
                 print(file=f)
+        f.close()
 
