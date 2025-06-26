@@ -9,7 +9,3 @@ name = "llm_security_benchmark"
   [[sessions.windows]]
   name = "tests"
   # command = "docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama"
-
-  [[sessions.windows]]
-  name = "inspect"
-  command = "source .venv/bin/activate && inspect view"
