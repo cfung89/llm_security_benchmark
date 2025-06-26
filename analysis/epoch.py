@@ -1,8 +1,5 @@
 #! ../.venv/bin/python3
 
-# figure 1 no ci, zoom and no zoom
-# figure 2 ci, zoom and no zoom
-
 import os
 from inspect_ai.log import read_eval_log, read_eval_log_sample_summaries
 import matplotlib.pyplot as plt
@@ -120,10 +117,10 @@ def line_plot(data: dict) -> None:
     fig3.legend(loc="lower center", bbox_to_anchor=(0.5, -0.1), ncol=2, fontsize=12, frameon=False)
     fig4.legend(loc="lower center", bbox_to_anchor=(0.5, -0.1), ncol=2, fontsize=12, frameon=False)
 
-    fig1.suptitle("Figure 1: Success rate per Epoch")
-    fig2.suptitle("Figure 2: Standard Deviation per Epoch")
-    fig3.suptitle("Figure 3: Success rate per Epoch with Confidence Interval")
-    fig4.suptitle("Figure 4: Standard Deviation per Epoch with Confidence Interval")
+    fig1.suptitle("Figure 1: Success rate per Epoch (Magnified)")
+    fig2.suptitle("Figure 2: Standard Deviation per Epoch (Magnified)")
+    fig3.suptitle("Figure 3: Success rate per Epoch with Confidence Interval (Magnified)")
+    fig4.suptitle("Figure 2: Standard Deviation per Epoch (Magnified)")
 
     fig1.tight_layout(rect=(0, 0.05, 1, 1))
     fig2.tight_layout(rect=(0, 0.05, 1, 1))
@@ -134,6 +131,9 @@ def line_plot(data: dict) -> None:
     fig2.savefig("../results/stdev_zoom.png")
     fig3.savefig("../results/mean_zoom_ci.png")
     fig4.savefig("../results/stdev_zoom_ci.png")
+
+    fig1.suptitle("Figure 1: Success rate per Epoch")
+    fig4.suptitle("Figure 2: Standard Deviation per Epoch")
 
     cybench1.set_ylim(0, 1)
     intercode1.set_ylim(0, 1)
@@ -196,14 +196,14 @@ def _compute_ci(y):
     print("CI", ci_lower, ci_upper)
     return ci_lower, ci_upper
 
-# def _compute_ci_bootstrap(data, epoch, n_bootstrap=100):
-#     estimates = []
-#     for _ in range(n_bootstrap):
-#         sample = np.random.choice(data, size=epoch, replace=True)
-#         estimates.append(np.mean(sample))
-#     ci_lower = y - np.std(estimates)
-#     ci_upper = y + np.std(estimates)
-#     return ci_lower, ci_upper
+def _compute_ci_bootstrap(data, epoch, n_bootstrap=100):
+    estimates = []
+    for _ in range(n_bootstrap):
+        sample = np.random.choice(data, size=epoch, replace=True)
+        estimates.append(np.std(sample))
+    ci_lower = np.mean(estimates)
+    ci_upper = np.mean(estimates)
+    return ci_lower, ci_upper
 
 if __name__ == "__main__":
     data = extract()
