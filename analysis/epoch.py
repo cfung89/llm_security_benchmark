@@ -225,6 +225,7 @@ def _compute_ci_bootstrap(name, epoch=num_of_epochs, n_bootstrap=100):
     model = "mistral" if "mistral" in model_name.lower() else "gemma"
     df = pd.read_csv(f"../results/final_{model}_{task}_{num_of_epochs}_epochs.csv", index_col=0, header=0).iloc[:-1, :-1]
 
+    total_estimates = []
     mean_stds = []
     ci_lowers = []
     ci_uppers = []
@@ -235,9 +236,12 @@ def _compute_ci_bootstrap(name, epoch=num_of_epochs, n_bootstrap=100):
             sample = df.iloc[:, attempts]
             means = sample.mean(axis=1)
             estimates.append(np.std(means))
+        total_estimates.append(estimates)
         mean_stds.append(np.mean(estimates))
         ci_lowers.append(np.percentile(estimates, 2.5))
         ci_uppers.append(np.percentile(estimates, 97.5))
+    out = pd.DataFrame(total_estimates, index=range(1, num_of_epochs + 1), columns=range(1, 100))
+    out.to_csv(f"../results/{model}_{task}_std_estimates.csv")
     # print(name, mean_stds, ci_lowers, ci_uppers)
     return mean_stds, ci_lowers, ci_uppers
 
