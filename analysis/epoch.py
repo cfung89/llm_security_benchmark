@@ -48,6 +48,7 @@ def line_plot(data: dict, directory: str = "../results") -> None:
     for name, df in list(data.items()):
         task_name, model_name = name.split("/")
         means, stdevs = compute_values(df)
+        print(name, f"Range of mean: {round((max(means) - min(means)) * 100, 2)}%", f"Range of mean: {round((max(stdevs) - min(stdevs)) * 100, 2)}%")
         # mean_ci_lower, mean_ci_upper = compute_ci_standard(means, stdevs)
         mean_ci_lower, mean_ci_upper = compute_ci_bootstrap(df, np.mean)
         std_ci_lower, std_ci_upper = compute_ci_bootstrap(df, np.std)
