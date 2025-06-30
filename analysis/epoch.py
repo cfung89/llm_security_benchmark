@@ -31,7 +31,8 @@ def extract_results(write: bool = False) -> dict:
         df["mean per task"] = df.mean(axis=1)
         df.iloc[-1] = df.mean()
         if write:
-            df.to_csv(f"../results/{i.split("/")[-1].replace(".eval", ".csv")}")
+            new_name = i.split("/")[-2].replace(".eval", ".csv")
+            df.to_csv(f"../results/{new_name}")
         out[name] = df
     return out
 
@@ -48,7 +49,8 @@ def line_plot(data: dict, directory: str = "../results") -> None:
         task_name, model_name = name.split("/")
         means, stdevs = compute_values(df)
         mean_ci_lower, mean_ci_upper = compute_ci_standard(means, stdevs)
-        std_ci_lower, std_ci_upper = compute_ci_bootstrap(df)
+        # mean_ci_lower, mean_ci_upper = compute_ci_bootstrap(df, np.mean)
+        std_ci_lower, std_ci_upper = compute_ci_bootstrap(df, np.std)
         colour = ("g", "green") if "mistral" in model_name.lower() else ("b", "blue")
 
         if task_name == "cybench":

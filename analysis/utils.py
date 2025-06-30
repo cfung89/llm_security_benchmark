@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from typing import Callable
 from inspect_ai.log import EvalLog, EvalSampleSummary
 
 num_of_epochs = 10
@@ -46,7 +47,7 @@ def compute_ci_standard(y, std):
     # print("CI", ci_lower, ci_upper)
     return ci_lower, ci_upper
 
-def compute_ci_bootstrap(df: pd.DataFrame, epochs: int = num_of_epochs, n_bootstrap: int = 100, directory: str | None = None, name: str | None = None):
+def compute_ci_bootstrap(df: pd.DataFrame, func: Callable, epochs: int = num_of_epochs, n_bootstrap: int = 100, directory: str | None = None, name: str | None = None):
     total_estimates = []
     # mean_stds = []
     ci_lowers = []
@@ -58,7 +59,7 @@ def compute_ci_bootstrap(df: pd.DataFrame, epochs: int = num_of_epochs, n_bootst
             attempts = np.random.choice(df.shape[1], size=e+1, replace=True)
             sample = df.iloc[:, attempts]
             means = sample.mean(axis=1)
-            estimates.append(np.std(means))
+            estimates.append(func(means))
         total_estimates.append(estimates)
         # mean_stds.append(np.mean(estimates))
         ci_lowers.append(np.percentile(estimates, 2.5))
