@@ -48,8 +48,8 @@ def line_plot(data: dict, directory: str = "../results") -> None:
     for name, df in list(data.items()):
         task_name, model_name = name.split("/")
         means, stdevs = compute_values(df)
-        mean_ci_lower, mean_ci_upper = compute_ci_standard(means, stdevs)
-        # mean_ci_lower, mean_ci_upper = compute_ci_bootstrap(df, np.mean)
+        # mean_ci_lower, mean_ci_upper = compute_ci_standard(means, stdevs)
+        mean_ci_lower, mean_ci_upper = compute_ci_bootstrap(df, np.mean)
         std_ci_lower, std_ci_upper = compute_ci_bootstrap(df, np.std)
         colour = ("g", "green") if "mistral" in model_name.lower() else ("b", "blue")
 
@@ -59,9 +59,13 @@ def line_plot(data: dict, directory: str = "../results") -> None:
 
             cybench_mean_ci.plot(x, means, f"{colour[0]}o-", label=model_name)
             cybench_mean_ci.fill_between(x, mean_ci_lower, mean_ci_upper, color=f"light{colour[1]}")
+            cybench_mean_ci.plot(x, mean_ci_lower, f"{colour[0]}--")
+            cybench_mean_ci.plot(x, mean_ci_upper, f"{colour[0]}--")
 
             cybench_stdev_ci.plot(x, stdevs, f"{colour[0]}o-", label=model_name)
             cybench_stdev_ci.fill_between(x, std_ci_lower, std_ci_upper, color=f"light{colour[1]}")
+            cybench_stdev_ci.plot(x, std_ci_lower, f"{colour[0]}--")
+            cybench_stdev_ci.plot(x, std_ci_upper, f"{colour[0]}--")
 
         elif task_name == "gdm_intercode_ctf":
             intercode_mean.plot(x, means, f"{colour[0]}o-", label=model_name)
@@ -69,9 +73,13 @@ def line_plot(data: dict, directory: str = "../results") -> None:
 
             intercode_mean_ci.plot(x, means, f"{colour[0]}o-", label=model_name)
             intercode_mean_ci.fill_between(x, mean_ci_lower, mean_ci_upper, color=f"light{colour[1]}")
+            intercode_mean_ci.plot(x, mean_ci_lower, f"{colour[0]}--")
+            intercode_mean_ci.plot(x, mean_ci_upper, f"{colour[0]}--")
 
             intercode_stdev_ci.plot(x, stdevs, f"{colour[0]}o-", label=model_name)
             intercode_stdev_ci.fill_between(x, std_ci_lower, std_ci_upper, color=f"light{colour[1]}")
+            intercode_stdev_ci.plot(x, std_ci_lower, f"{colour[0]}--")
+            intercode_stdev_ci.plot(x, std_ci_upper, f"{colour[0]}--")
         else:
             raise ValueError(f"Invalid model name: {model_name}")
 
