@@ -4,12 +4,12 @@ import sys, pathlib
 from inspect_ai.log import EvalLog, EvalSample, read_eval_log_sample, read_eval_log
 from inspect_ai.model import ChatMessageSystem, ChatMessageUser, ChatMessageAssistant, ChatMessageTool
 
-from utils import _get_model_name, _get_task_name
+from utils import get_model_name, get_task_name
 
 def get_transcript(file: str, task: str, epochs: list, directory: str | None = None) -> str | None:
     header: EvalLog = read_eval_log(file, header_only=True)
-    model = _get_model_name(header)
-    dataset = _get_task_name(header)
+    model = get_model_name(header)
+    dataset = get_task_name(header)
 
     output = ""
     for epoch in epochs:

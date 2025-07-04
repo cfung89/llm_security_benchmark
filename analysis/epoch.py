@@ -52,19 +52,20 @@ def line_plot(data: dict, directory: str = "../results") -> None:
         # mean_ci_lower, mean_ci_upper = compute_ci_standard(means, stdevs)
         mean_ci_lower, mean_ci_upper = compute_ci_bootstrap(df, np.mean)
         std_ci_lower, std_ci_upper = compute_ci_bootstrap(df, np.std)
-        colour = ("g", "green") if "mistral" in model_name.lower() else ("b", "blue")
+        colour = ("orange", "darkorange") if "mistral" in model_name.lower() else ("blue", "lightblue")
+        model_name = "Model F" if "mistral" in model_name.lower() else "Model E"
 
         if task_name == "cybench":
             cybench_mean.plot(x, means, f"{colour[0]}o-", label=model_name)
             cybench_stdev.plot(x, stdevs, f"{colour[0]}o-", label=model_name)
 
             cybench_mean_ci.plot(x, means, f"{colour[0]}o-", label=model_name)
-            cybench_mean_ci.fill_between(x, mean_ci_lower, mean_ci_upper, color=f"light{colour[1]}")
+            cybench_mean_ci.fill_between(x, mean_ci_lower, mean_ci_upper, color=colour[1])
             cybench_mean_ci.plot(x, mean_ci_lower, f"{colour[0]}--")
             cybench_mean_ci.plot(x, mean_ci_upper, f"{colour[0]}--")
 
             cybench_stdev_ci.plot(x, stdevs, f"{colour[0]}o-", label=model_name)
-            cybench_stdev_ci.fill_between(x, std_ci_lower, std_ci_upper, color=f"light{colour[1]}")
+            cybench_stdev_ci.fill_between(x, std_ci_lower, std_ci_upper, color=colour[1])
             cybench_stdev_ci.plot(x, std_ci_lower, f"{colour[0]}--")
             cybench_stdev_ci.plot(x, std_ci_upper, f"{colour[0]}--")
 
@@ -73,12 +74,12 @@ def line_plot(data: dict, directory: str = "../results") -> None:
             intercode_stdev.plot(x, stdevs, f"{colour[0]}o-", label=model_name)
 
             intercode_mean_ci.plot(x, means, f"{colour[0]}o-", label=model_name)
-            intercode_mean_ci.fill_between(x, mean_ci_lower, mean_ci_upper, color=f"light{colour[1]}")
+            intercode_mean_ci.fill_between(x, mean_ci_lower, mean_ci_upper, color=colour[1])
             intercode_mean_ci.plot(x, mean_ci_lower, f"{colour[0]}--")
             intercode_mean_ci.plot(x, mean_ci_upper, f"{colour[0]}--")
 
             intercode_stdev_ci.plot(x, stdevs, f"{colour[0]}o-", label=model_name)
-            intercode_stdev_ci.fill_between(x, std_ci_lower, std_ci_upper, color=f"light{colour[1]}")
+            intercode_stdev_ci.fill_between(x, std_ci_lower, std_ci_upper, color=colour[1])
             intercode_stdev_ci.plot(x, std_ci_lower, f"{colour[0]}--")
             intercode_stdev_ci.plot(x, std_ci_upper, f"{colour[0]}--")
         else:
