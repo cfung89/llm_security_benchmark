@@ -4,7 +4,7 @@ import os
 from inspect_ai.log import read_eval_log, read_eval_log_samples
 import pandas as pd
 
-from utils import _get_model_name, _get_task_name
+from utils import get_model_name, get_task_name
 
 data_path = "../data"
 files = [os.path.join(data_path, f1) for f1 in os.listdir(data_path) if os.path.isfile(os.path.join(data_path, f1)) and f1[-5:] == ".eval"]
@@ -19,8 +19,8 @@ for i in files:
     filename = i.replace(data_path, "../results").replace(".eval", ".csv")
     df = pd.read_csv(filename, index_col=0, header=0)
     header = read_eval_log(i, header_only=True)
-    model = _get_model_name(header)
-    task = _get_task_name(header)
+    model = get_model_name(header)
+    task = get_task_name(header)
     if task == "cybench":
         continue
     name = f"{task}/{model.capitalize()}"

@@ -52,8 +52,8 @@ def line_plot(data: dict, directory: str = "../results") -> None:
         # mean_ci_lower, mean_ci_upper = compute_ci_standard(means, stdevs)
         mean_ci_lower, mean_ci_upper = compute_ci_bootstrap(df, np.mean)
         std_ci_lower, std_ci_upper = compute_ci_bootstrap(df, np.std)
-        colour = ("orange", "darkorange") if "mistral" in model_name.lower() else ("blue", "lightblue")
-        model_name = "Model F" if "mistral" in model_name.lower() else "Model E"
+        colour = ("#2CA02C", "lightgreen") if "mistral" in model_name.lower() else ("#D6272B", "mistyrose")
+        model_name = "Model E" if "mistral" in model_name.lower() else "Model F"
 
         if task_name == "cybench":
             cybench_mean.plot(x, means, color=colour[0], marker="o", linestyle="-", label=model_name)
@@ -126,6 +126,26 @@ def line_plot(data: dict, directory: str = "../results") -> None:
     fig2.tight_layout(rect=(0, 0.05, 1, 1))
     fig3.tight_layout(rect=(0, 0.05, 1, 1))
     fig4.tight_layout(rect=(0, 0.05, 1, 1))
+
+    handles1, labels1 = fig1.gca().get_legend_handles_labels()
+    sorted_handles_labels1 = sorted(zip(labels1, handles1), key=lambda x: x[0])
+    sorted_labels1, sorted_handles1 = zip(*sorted_handles_labels1)
+    fig1.legend(sorted_handles1, sorted_labels1)
+
+    handles2, labels2 = fig2.gca().get_legend_handles_labels()
+    sorted_handles_labels2 = sorted(zip(labels2, handles2), key=lambda x: x[0])
+    sorted_labels2, sorted_handles2 = zip(*sorted_handles_labels2)
+    fig2.legend(sorted_handles2, sorted_labels2)
+
+    handles3, labels3 = fig3.gca().get_legend_handles_labels()
+    sorted_handles_labels3 = sorted(zip(labels3, handles3), key=lambda x: x[0])
+    sorted_labels3, sorted_handles3 = zip(*sorted_handles_labels3)
+    fig3.legend(sorted_handles3, sorted_labels3)
+
+    handles4, labels4 = fig4.gca().get_legend_handles_labels()
+    sorted_handles_labels4 = sorted(zip(labels4, handles4), key=lambda x: x[0])
+    sorted_labels4, sorted_handles4 = zip(*sorted_handles_labels4)
+    fig4.legend(sorted_handles4, sorted_labels4)
 
     fig1.savefig(f"{directory}/mean_zoom.png")
     fig2.savefig(f"{directory}/stdev_zoom.png")
