@@ -112,10 +112,10 @@ def line_plot(data: dict, directory: str = "../results") -> None:
     cybench_stdev_ci.set_title("Cybench")
     intercode_stdev_ci.set_title("IntercodeCTF")
 
-    fig1.legend(loc="lower center", bbox_to_anchor=(0.5, -0.1), ncol=2, fontsize=12, frameon=False)
-    fig2.legend(loc="lower center", bbox_to_anchor=(0.5, -0.1), ncol=2, fontsize=12, frameon=False)
-    fig3.legend(loc="lower center", bbox_to_anchor=(0.5, -0.1), ncol=2, fontsize=12, frameon=False)
-    fig4.legend(loc="lower center", bbox_to_anchor=(0.5, -0.1), ncol=2, fontsize=12, frameon=False)
+    # fig1.legend(loc="lower center", bbox_to_anchor=(0.5, -0.1), ncol=2, fontsize=12, frameon=False)
+    # fig2.legend(loc="lower center", bbox_to_anchor=(0.5, -0.1), ncol=2, fontsize=12, frameon=False)
+    # fig3.legend(loc="lower center", bbox_to_anchor=(0.5, -0.1), ncol=2, fontsize=12, frameon=False)
+    # fig4.legend(loc="lower center", bbox_to_anchor=(0.5, -0.1), ncol=2, fontsize=12, frameon=False)
 
     fig1.suptitle("Success Rate over Number of Attempts (Magnified)")
     fig2.suptitle("Standard Deviation of Success Rate over Number of Attempts (Magnified)")
