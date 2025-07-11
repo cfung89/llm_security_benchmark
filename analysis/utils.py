@@ -48,6 +48,9 @@ def compute_ci_standard(y, std):
     return ci_lower, ci_upper
 
 def compute_ci_bootstrap(df: pd.DataFrame, func: Callable, epochs: int = num_of_epochs, n_bootstrap: int = 100, directory: str | None = None, name: str | None = None):
+    """
+    The confidence interval is computed via bootstrapping, as follows: for a given number of attempts `x`, we uniformly sample `x` attempts, then compute the mean success rate for each task. The estimated standard deviation is then calculated from the ensemble of success rates across all tasks. This sampling and calculation process is repeated a total of 100 times, and the bounds of the confidence interval are estimated using percentiles from the resulting distribution.
+    """
     total_estimates = []
     # mean_stds = []
     ci_lowers = []

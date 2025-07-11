@@ -37,5 +37,3 @@ cd analysis
 Examples:
 - Output the transcript of the 1st epoch of task 79 of Intercode with Gemma: `./transcript.py ../logs/final_gemma_intercode_10_epochs.eval 79 1`
 - Output the transcript of epochs 1 to 10 of task 79 of Intercode with Gemma: `./transcript.py ../logs/final_gemma_intercode_10_epochs.eval 79 {1..10}`
-
-## <a name="analysis" /> 2. Analysis
