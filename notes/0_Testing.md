@@ -1,8 +1,19 @@
 # 0_Testing
 
-## Installation
+## Table of Contents
 
-### Install Python dependencies
+1. [Installation](#installation)
+    1. [Install Python dependencies](#python_deps)
+    2. [Install Ollama](#ollama)
+2. [Usage](#usage)
+    1. [Running Intercode from inspect_evals](#intercode_evals)
+    2. [Running Cybench from inspect_evals](#cybench_evals)
+    3. [Running Cybench from usnistgov/caisi-cyber-evals](#cybench_caisi)
+3. [Results](#results)
+
+## <a name="installation" /> 1. Installation
+
+### <a name="python_deps" /> i. Install Python dependencies
 
 On Linux:
 
@@ -25,7 +36,7 @@ pip install -r requirements.txt
 
 Certain Python packages or other dependencies may be missing for specific tests.
 
-### Install Ollama
+### <a name="ollama" /> ii. Install Ollama
 
 #### Using Docker
 
@@ -43,7 +54,7 @@ Once an Ollama Docker container is running, install the required LLM with: `dock
 Ollama can be installed directly on the device: [https://ollama.com/download](https://ollama.com/download).
 Then, install the required LLM with: `ollama pull <model-name>`.
 
-## Usage
+## <a name="usage" /> 2. Usage
 
 The Inspect framework supports using Ollama locally with a default base URL for requests set to `http://localhost:11434`.
 To run tests, the arguments are as follows:
@@ -54,19 +65,19 @@ inspect eval <test-origin>/<test-name> --model ollama/<model-name> [OPTIONS]
 
 `[OPTIONS]` includes `sandbox_type`, `token-limit`, `limit`, `solver`, `max-connections`, `temperature`, ...
 
-### Running Intercode from inspect_evals
+### <a name="intercode_evals" /> i. Running Intercode from inspect_evals
 
 ```bash
 inspect eval inspect_evals/gdm_intercode_ctf --model ollama/<model-name>
 ```
 
-### Running Cybench from inspect_evals
+### <a name="cybench_evals" /> ii. Running Cybench from inspect_evals
 
 Additional setup is required. Read the documentation at [https://github.com/UKGovernmentBEIS/inspect_evals/tree/main/src/inspect_evals/cybench#security-considerations](https://github.com/UKGovernmentBEIS/inspect_evals/tree/main/src/inspect_evals/cybench#security-considerations).
 
 Then, run: `inspect eval inspect_evals/cybench --model ollama/<model-name> -T sandbox_type=<sandbox-type>`.
 
-### Running Cybench from usnistgov/caisi-cyber-evals
+### <a name="cybench_caisi" /> iii. Running Cybench from usnistgov/caisi-cyber-evals
 
 >[!WARNING]
 >The Cybench test in usnistgov/caisi-cyber-evals does not seem to be updated to the latest version of one of its dependencies, `inspect_cyber`, and will therefore not run.
@@ -88,6 +99,6 @@ Then, to run the test:
 inspect eval ucb/cybench --solver ucb/agent --model ollama/<model-name>
 ```
 
-## Results
+## <a name="results" /> 3. Results
 
 In order to view/analyze results, see [1_Analysis](./1_Analysis.md).
