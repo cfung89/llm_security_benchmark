@@ -47,12 +47,18 @@ The recommended option is to use the official Ollama Docker image (with GPU acce
 
 Verify that an Ollama Docker container is running with `docker ps` or by sending a request to `http://localhost:11434`.
 
-Once an Ollama Docker container is running, install the required LLM with: `docker exec -it ollama ollama pull <model-name>`.
+Once an Ollama Docker container is running, install the required LLM with:
+```bash
+docker exec -it ollama ollama pull <model-name>
+```
 
 #### Other
 
 Ollama can be installed directly on the device: [https://ollama.com/download](https://ollama.com/download).
-Then, install the required LLM with: `ollama pull <model-name>`.
+Then, install the required LLM with:
+```bash
+ollama pull <model-name>
+```
 
 ## <a name="usage" /> 2. Usage
 
@@ -75,7 +81,10 @@ inspect eval inspect_evals/gdm_intercode_ctf --model ollama/<model-name>
 
 Additional setup is required. Read the documentation at [https://github.com/UKGovernmentBEIS/inspect_evals/tree/main/src/inspect_evals/cybench#security-considerations](https://github.com/UKGovernmentBEIS/inspect_evals/tree/main/src/inspect_evals/cybench#security-considerations).
 
-Then, run: `inspect eval inspect_evals/cybench --model ollama/<model-name> -T sandbox_type=<sandbox-type>`.
+Then, run:
+```bash
+inspect eval inspect_evals/cybench --model ollama/<model-name> -T sandbox_type=<sandbox-type>
+```
 
 ### <a name="cybench_caisi" /> iii. Running Cybench from usnistgov/caisi-cyber-evals
 
