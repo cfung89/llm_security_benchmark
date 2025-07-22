@@ -10,7 +10,7 @@ else
     exit 1
 fi
 
-module load python
+module load python/3.12.1-gcc-11.3.1-7tuhjhr
 
 # Confirm Python version & paths
 module list
@@ -20,6 +20,8 @@ python --version
 
 python3 -m venv $venv_name
 source $venv_name/bin/activate
+
+pip install -U pip
 
 pip install inspect_ai \
             git+https://github.com/UKGovernmentBEIS/inspect_evals \

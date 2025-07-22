@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ## 1.(a) load the CC python3.7 module & required libs:
-module load python/3.7
-module load cuda/10.0 cudnn
+module load python/3.12.1-gcc-11.3.1-7tuhjhr
+# module load cuda/10.0 cudnn
 module load hdf5
 
 ## -or- 1.(b) choose to load python3.8 instead:
@@ -23,13 +23,13 @@ which pip
 python --version
 
 ## 3.1. Create a new virtual environment named tf-py37:
-virtualenv ~/work/venv/tf-py37
+python3 -m venv ~/work/venv/tf-py
 
 ## 3.2. activate env:
-source ~/work/venv/tf-py37/bin/activate  
+source ~/work/venv/tf-py/bin/activate
 
 ## 3.3. run pip to install tf 1.x:
-pip install tensorflow-gpu==1.15.0
+pip install tensorflow
 
 ## See also table: https://stackoverflow.com/questions/50622525/which-tensorflow-and-cuda-version-combinations-are-compatible
 # Trixie presently supports cuda versions: 10.0.x and 10.1.x:
