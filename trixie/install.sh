@@ -18,8 +18,13 @@ which python
 which pip
 python --version
 
-python3 -m venv $venv_name
-source $venv_name/bin/activate
+mkdir -p ~/venvs
+if [ -d "~/venvs/$venv_name" ]; then
+    rm -rf ~/venvs/$venv_name
+fi
+python3 -m venv ~/venvs/$venv_name
+ln -s ~/venvs/$venv_name ~/work/$venv_name
+source ~/work/$venv_name/bin/activate
 
 pip install -U pip
 
@@ -29,4 +34,5 @@ pip install inspect_ai \
             mistral_common # Mistral-Large-Instruct-2411
             # openai
 
-echo -e "\nSuccessfully installed packages to '$(pwd)/$venv_name'."
+echo -e "\nSuccessfully installed packages to '~/work/$venv_name'."
+
