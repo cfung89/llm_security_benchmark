@@ -39,8 +39,8 @@ echo -e "$(/usr/bin/nvidia-smi)\n"
 
 # Jobs
 echo -e "\nRunning jobs...\n"
-inspect eval inspect_evals/gdm_intercode_ctf --model vllm/mistralai/Mistral-Large-Instruct-2411
-inspect eval inspect_evals/cybench --model vllm/mistralai/Mistral-Large-Instruct-2411
+inspect eval inspect_evals/gdm_intercode_ctf --model ollama/mistral-large
+inspect eval inspect_evals/cybench --model ollama/mistral-large
 
-# Example
-# python3 ~/work/test.py
+# srun inspect eval inspect_evals/gdm_intercode_ctf --model ollama/mistral-large
+# srun inspect eval inspect_evals/cybench --model ollama/mistral-large
