@@ -31,16 +31,19 @@ echo "Loading environment..."
 module load python/3.12.1-gcc-11.3.1-7tuhjhr
 source ~/work/.venv/bin/activate
 
+alias ollama='~/work/ollama'
+ollama serve &
+
+export CYBENCH_ACKNOWLEDGE_RISKS=1
+
 # Checks
 echo -e "Checks...\n"
 echo -e "$(hostname)\n"
 echo -e "$(which python)\n"
 echo -e "$(/usr/bin/nvidia-smi)\n"
+echo -e "$(ollama list)\n"
 
 # Jobs
 echo -e "\nRunning jobs...\n"
 inspect eval inspect_evals/gdm_intercode_ctf --model ollama/mistral-large
-inspect eval inspect_evals/cybench --model ollama/mistral-large
-
-# srun inspect eval inspect_evals/gdm_intercode_ctf --model ollama/mistral-large
-# srun inspect eval inspect_evals/cybench --model ollama/mistral-large
+inspect eval inspect_evals/cybench --model ollama/mistral-large -T sandbox_type=docker
